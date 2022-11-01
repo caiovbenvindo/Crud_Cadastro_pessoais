@@ -1,8 +1,10 @@
 const modal = document.querySelector('.modal-container')
 const tbody = document.querySelector('tbody')
 const sNome = document.querySelector('#m-nome')
-const sFuncao = document.querySelector('#m-funcao')
-const sSalario = document.querySelector('#m-salario')
+const sSobrenome = document.querySelector('#m-sobrenome')
+const sCpf = document.querySelector('#m-cpf')
+const sRg = document.querySelector('#m-rg')
+const sData_nascimento = document.querySelector('#m-data_nascimento')
 const btnSalvar = document.querySelector('#btnSalvar')
 
 let itens
@@ -19,15 +21,19 @@ function openModal(edit = false, index = 0) {
 
   if (edit) {
     sNome.value = itens[index].nome
-    sFuncao.value = itens[index].funcao
-    sSalario.value = itens[index].salario
+    sSobrenome.value = itens[index].sobrenome
+    sCpf.value = itens[index].CPF
+    sRg.value = itens[index].rg
+    sData_nascimento.value = itens[index].data_nascimento
     id = index
   } else {
     sNome.value = ''
-    sFuncao.value = ''
-    sSalario.value = ''
+    sSobrenome.value = ''
+    sCpf.value = ''
+    sRg.value = ''
+    sData_nascimento.value = ''
   }
-  
+
 }
 
 function editItem(index) {
@@ -46,8 +52,10 @@ function insertItem(item, index) {
 
   tr.innerHTML = `
     <td>${item.nome}</td>
-    <td>${item.funcao}</td>
-    <td>R$ ${item.salario}</td>
+    <td>${item.sobrenome}</td>
+    <td>${item.cpf}</td>
+    <td>${item.rg}</td>
+    <td>${item.data_nascimento}</td>
     <td class="acao">
       <button onclick="editItem(${index})"><i class='bx bx-edit' ></i></button>
     </td>
@@ -59,8 +67,8 @@ function insertItem(item, index) {
 }
 
 btnSalvar.onclick = e => {
-  
-  if (sNome.value == '' || sFuncao.value == '' || sSalario.value == '') {
+
+  if (sNome.value == '' || sSobrenome.value == '' || sCpf.value == '' || sRg.value == '' || sData_nascimento.value == '') {
     return
   }
 
@@ -68,10 +76,12 @@ btnSalvar.onclick = e => {
 
   if (id !== undefined) {
     itens[id].nome = sNome.value
-    itens[id].funcao = sFuncao.value
-    itens[id].salario = sSalario.value
+    itens[id].sobrenome = sSobrenome.value
+    itens[id].cpf = sCpf.value
+    itens[id].rg = sRg.value
+    itens[id].data_nascimento = sData_nascimento.value
   } else {
-    itens.push({'nome': sNome.value, 'funcao': sFuncao.value, 'salario': sSalario.value})
+    itens.push({ 'nome': sNome.value, 'sobrenome': sSobrenome.value, 'cpf': sCpf.value, 'rg': sRg.value, 'data_nascimento': sData_nascimento.value })
   }
 
   setItensBD()
